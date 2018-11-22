@@ -1,14 +1,20 @@
 # ┌──────────────────────────────────────────────────────────────────┐
-# │  Project settings                                                │
+#   Project settings
 # └──────────────────────────────────────────────────────────────────┘
 cmake_minimum_required(VERSION 3.9)
-project(RE)
-set(CMAKE_CXX_STANDARD 17)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+project("StreamSome - the streaming library" VERSION 1.0.0)
 
-# ┌──────────────────────────────────────────────────────────────────┐
-# │  Many different programs                                         │
-# └──────────────────────────────────────────────────────────────────┘
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/utils/cmake")
+include(legacy)
 
-add_subdirectory(linux-wifisound)
-add_subdirectory(linux-audiowire)
+
+set(Boost_USE_STATIC_LIBS        ON)  # only find static libs
+set(Boost_USE_DEBUG_LIBS         OFF) # ignore debug libs and
+set(Boost_USE_RELEASE_LIBS       ON)  # only find release libs
+set(Boost_USE_MULTITHREADED      ON)
+set(Boost_USE_STATIC_RUNTIME     OFF)
+find_package(Boost REQUIRED)
+
+
+add_subdirectory(streamsome)
+add_subdirectory(audio)

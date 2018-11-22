@@ -359,19 +359,15 @@ static int recordCallback(const void *inputBuffer, void *outputBuffer,
 				v4 = 8<<3;
 			else
 				v4 = 0;
-			header.flags |= v4;
-			v5 = header.flags | v4;
 			if (clientConn[i].optionCompress & 1<<1)
 				v6 = 8<<4;
 			else
 				v6 = 0;
-			header.flags = v5 | v6;
-			v7 = v5 | v6;
 			if (clientConn[i].optionCompress & 1<<2)
 				v8 = 8<<5;
 			else
 				v8 = 0;
-			header.flags = v7 | v8;
+			header.flags = header.flags | v4 | v6 | v8;
 			
 			*(MsgHeader *) sendBuffer = header;
 			if (header.seqnum % 0xF == 0) {
